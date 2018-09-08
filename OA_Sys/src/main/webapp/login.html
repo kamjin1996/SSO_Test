@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OA系统</title>
+    <script src="jquery.min.js"></script>
+    <script type="application/javascript">
+        function login() {
+            var f=$("#fm1");
+            $.ajax({
+                url:f[0].action,
+                method:"POST",
+                xhrFields:{withCredentials:true},//Cookie跨域
+                data:f.serialize(),
+                success:function (obj) {
+                    if(obj.code==1000){
+                        //成功
+                        location.href="index.html";
+                    }else{
+                        alert("登录失败："+obj.msg);
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+<div>
+    <h1>欢迎登录OA</h1>
+    <form action="http://localhost:8086/ssologin.do" id="fm1">
+        <input name="username" placeholder="用户名"><br/>
+        <input name="password" placeholder="密码"><br/>
+        <input type="button" value="OA登录" onclick="login()">
+    </form>
+</div>
+</body>
+</html>
